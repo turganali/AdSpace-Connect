@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="signup.css" />
+    <title>Log In|Sign Up</title>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>SignUp</h2>
+      <label for="reg-log"></label>
+      <form id="registerForm" method="POST" action="http://localhost:3000/user/register">
+        <div class="user-box">
+          <input type="text" name="name" required="" />
+          <label>Name</label>
+        </div>
+        <!-- <div class="user-box">
+      <input type="text" name="" required="">
+      <label>Surname</label>
+    </div> -->
+        <div class="user-box">
+          <input type="text" name="email" required="" />
+          <label>Email</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" required="" />
+          <label>Password</label>
+        </div>
+        <a href="login.html"> ←Log In </a>
+        <a>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <button class="noclass" type="submit">Sign Up</button>
+        </a>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          console.log('ss')
+          var formData = new FormData(this);
+
+          fetch("http://localhost:3000/user/register", {
+            method: "POST",
+            body: formData,
+          })
+            .then(function (response) {
+              console.log('res',response)
+              if (response.status === 201) {
+                window.location.href = "login.html";
+              } else {
+                alert("Заполните все поля");
+              }
+            })
+            .catch(function (error) {
+              console.error("Ошибка:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

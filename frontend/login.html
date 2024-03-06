@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="login.css" />
+    <title>Log In|Sign Up</title>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>Login</h2>
+      <label for="reg-log"></label>
+      <form
+        id="loginForm"
+        method="POST"
+        action="http://localhost:3000/user/login"
+      >
+        <div class="user-box">
+          <input type="text" name="email" required="" />
+          <label>Username</label>
+        </div>
+        <div class="user-box">
+          <input type="password" name="password" required="" />
+          <label>Password</label>
+        </div>
+        <a>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <button type="submit" class="noclass">Log In</button>
+        </a>
+        <a href="signup.html"> Sign Up→ </a>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          console.log('okk')
+          var formData = new FormData(this);
+
+          fetch("http://localhost:3000/user/login", {
+            method: "POST",
+            body: formData,
+          })
+            .then(function (response) {
+              
+              if (response.status === 201) {
+                window.location.href = "Home.htm";
+              } else {
+                alert("Неверный логин или пароль");
+              }
+            })
+            .catch(function (error) {
+              console.error("Ошибка:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
